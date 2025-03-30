@@ -17,8 +17,7 @@ The project adopts a Maven multi-module structure, mainly including the followin
 - **Order Management**: Users can place orders, pay for orders, query order history, view order details, cancel orders, reorder, and request order reminders.
 - **Store Information Query**: Users can check the business status of the store.
 
-![Main Page](static/MicroSoftwere1.png)
-![Order Page](static/MicroSoftwere2.png)
+![Main Page](static/MicroSoftwere3.png)
 ### 2. Admin-side Features
 - **Employee Management**: Administrators can add, modify, and delete employee information. Employees can log in and perform corresponding operations.
 - **Setmeal Management**: Administrators can add, modify, and delete setmeals, query setmeal lists, and start or stop setmeal sales.
@@ -27,7 +26,7 @@ The project adopts a Maven multi-module structure, mainly including the followin
 - **Data Statistics**: Provides turnover statistics, user statistics, order statistics, top 10 sales rankings, and the ability to export operational data reports.
 - **Workbench**: Allows querying of today's data, order management data, dish overview, and setmeal overview.
   ![Admin Page](static/Admin_panel.png)
-- ![API Page](static/Api_panel.png)
+  ![API Page](static/Api_panel.png)
 ## Technology Stack
 - **Backend Framework**: Spring Boot
 - **Data Persistence**: MyBatis
@@ -36,6 +35,7 @@ The project adopts a Maven multi-module structure, mainly including the followin
 - **Interface Documentation**: Swagger + Knife4j
 - **Payment**: WeChat Pay
 - **File Storage**: Alibaba Cloud OSS
+  ![Tech Stack](static/TechTools.png)
 
 ## Environment Configuration
 
@@ -96,20 +96,6 @@ sky:
     weChatPayCertFilePath: ${sky.wechat.weChatPayCertFilePath}
     notifyUrl: ${sky.wechat.notifyUrl}
     refundNotifyUrl: ${sky.wechat.refundNotifyUrl}
-```
-Configure the WeChat Pay information for the development environment in `sky-server/src/main/resources/application-dev.yml`:
-```yaml
-sky:
-  wechat:
-    appid: wx8ad8256c7ffe6ab7
-    secret: 964123fb74a32d01d9c0ee8c7d78c6d6
-    mchid : 1561414331
-    mchSerialNo: 4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606
-    privateKeyFilePath: D:\pay\apiclient_key.pem
-    apiV3Key: CZBK51236435wxpay435434323FFDuv3
-    weChatPayCertFilePath: D:\pay\wechatpay_166D96F876F45C7D07CE98952A96EC980368ACFC.pem
-    notifyUrl: https://58869fb.r2.cpolar.top/notify/paySuccess
-    refundNotifyUrl: https://58869fb.r2.cpolar.top/notify/refundSuccess
 ```
 
 ### 4. Alibaba Cloud OSS Configuration
