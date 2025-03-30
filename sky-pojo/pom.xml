@@ -9,11 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>sky-pojo</artifactId>
-    <properties>
-        <java.version>17</java.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>

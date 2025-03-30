@@ -1,6 +1,6 @@
 package com.sky.controller.admin;
 
-
+import com.sky.constant.MessageConstant;
 import com.sky.result.Result;
 import com.sky.utils.AliOssUtil;
 import io.swagger.annotations.Api;
@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.UUID;
 
+/**
+ * 通用接口
+ */
 @RestController
 @RequestMapping("/admin/common")
 @Api(tags = "通用接口")
@@ -22,6 +26,7 @@ public class CommonController {
 
     @Autowired
     private AliOssUtil aliOssUtil;
+
     /**
      * 文件上传
      * @param file
@@ -30,21 +35,23 @@ public class CommonController {
     @PostMapping("/upload")
     @ApiOperation("文件上传")
     public Result<String> upload(MultipartFile file){
-        log.info("文件上传，文件名：{}",file.getOriginalFilename());
+        log.info("文件上传：{}",file);
+
         try {
-            //获取上传的文件的字节数组
-            byte[] bytes = file.getBytes();
-            //获取原始文件名
+            //原始文件名
             String originalFilename = file.getOriginalFilename();
-            String substring = originalFilename.substring(0, originalFilename.lastIndexOf("."));
-            String objectName = UUID.randomUUID().toString() + substring;
-            //上传到OSS
-            String upload = aliOssUtil.upload(bytes, objectName);
-            return Result.success(upload);
-        } catch (Exception e) {
-            log.error("文件上传失败：{}",e.getMessage());
-            e.printStackTrace();
+            //截取原始文件名的后缀   dfdfdf.png
+            String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+            //构造新文件名称
+            String objectName = UUID.randomUUID().toString() + extension;
+
+            //文件的请求路径
+            String filePath = aliOssUtil.upload(file.getBytes(), objectName);
+            return Result.success(filePath);
+        } catch (IOException e) {
+            log.error("文件上传失败：{}", e);
         }
-        return Result.error("文件上传失败");
+
+        return Result.error(MessageConstant.UPLOAD_FAILED);
     }
 }
